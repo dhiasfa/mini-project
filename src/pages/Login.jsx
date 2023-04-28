@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../client";
@@ -10,7 +9,6 @@ const Login = ({ setToken }) => {
     formState: { errors },
     reset,
   } = useForm();
-  const regexName = /^[a-zA-Z ]{2,}$/;
   const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
 
   async function onSubmit(formData, e) {
