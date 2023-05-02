@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Tabel from "../components/tabel/Tabel";
-import { supabase } from "../client";
 const HomePage = ({ token }) => {
   let navigate = useNavigate();
 

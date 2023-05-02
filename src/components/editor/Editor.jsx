@@ -1,3 +1,5 @@
+import "react-quill/dist/quill.snow.css";
+
 export const modules = {
   toolbar: [
     [{ header: [1, 2, 3, 4, 5, false] }],

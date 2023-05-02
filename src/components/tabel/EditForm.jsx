@@ -1,81 +1,56 @@
-import React, { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { useForm } from "react-hook-form";
-import { modules, Preview } from "../Editor/Editor";
-import { supabase } from "../../client";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-const Create = ({ token }) => {
+import ReactQuill from "react-quill";
+// import "react-quill/dist/quill.snow.css";
+import { useForm } from "react-hook-form";
+import { modules } from "../Editor/Editor";
+const EditForm = ({ data, handleUpdate, setEditMode, content, setContent }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm();
-  const [value, setValue] = useState("");
-  const [image, setImage] = useState(null);
-  const [loading, setLoading] = useState(false);
+    setValue,
+  } = useForm({
+    defaultValues: {
+      title: data.title,
+      category: data.category,
+      image_url: data.image_url,
+    },
+  });
 
-  const navigate = useNavigate();
-
-  const url =
-    "https://kpbcywbosxqtlyyzflpu.supabase.co/storage/v1/object/public/images/artikel/";
-
-  const handleContentChange = (content, delta, source, editor) => {
-    setValue(editor.getHTML());
+  const handleContentChange = (value) => {
+    setContent(value);
   };
 
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
-  const uploadImage = async (image) => {
-    const { data: file, error } = await supabase.storage
-      .from("images")
-      .upload(`artikel/${image.name}`, image);
+  useEffect(() => {
+    setValue("title", data.title);
+    setValue("category", data.category);
+    setValue("image_url", data.image_url);
+    setContent(data.content);
+  }, [data, setValue, setContent]);
 
-    if (error) {
-      console.log("Error uploading file: ", error.message);
-      return { error };
-    }
+  const onSubmit = (data) => {
+    handleUpdate({ ...data, content });
   };
 
-  const onSubmit = async (data) => {
-    setLoading(true);
-    await uploadImage(image);
-
-    const { error: insertError } = await supabase.from("artikel").insert([
-      {
-        title: data.title,
-        content: value,
-        category: data.category,
-        image_url: `${url}${image.name}`,
-        user_id: token.user.id,
-      },
-    ]);
-
-    if (insertError) {
-      console.log("Error inserting data: ", insertError.message);
-      return;
-    }
-
-    setLoading(false);
-
-    reset();
-    setValue("");
-    setImage(null);
-    alert("Data berhasil ditambahkan!");
+  const onCancel = () => {
+    setEditMode(false);
+    setContent("");
   };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="image">
+          <label htmlFor="sampul"> Sampul Gambar</label> <br />
+          <img src={data.image_url} style={{ width: 300 }} alt="" />
+        </div>
         <div className="mb-3">
-          {loading && <h4>Loading...</h4>}
           <label htmlFor="title" className="form-label">
             Title
           </label>
           <input
-            type="title"
+            type="text"
             className="form-control"
             id="title"
             {...register("title", {
@@ -87,19 +62,6 @@ const Create = ({ token }) => {
             }}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="formFile" className="form-label">
-            Image :
-          </label>
-          <input
-            className="form-control"
-            type="file"
-            accept="image/*"
-            id="formFile"
-            required
-            onChange={handleImageChange}
-          />
-        </div>
 
         <p id="categoryHelp" className="form-text text-danger">
           {errors?.title?.message}
@@ -107,7 +69,7 @@ const Create = ({ token }) => {
         <div className="editor">
           <ReactQuill
             theme="snow"
-            value={value}
+            value={content}
             onChange={handleContentChange}
             modules={modules}
           />
@@ -149,12 +111,12 @@ const Create = ({ token }) => {
         </p>
         <div>
           <button type="submit" className="btn btn-primary">
-            Add Blog
+            Update
           </button>
           <button
             type="button"
             className="btn btn-secondary ms-2"
-            onClick={() => navigate("/home-page")}>
+            onClick={() => onCancel()}>
             Cancel
           </button>
         </div>
@@ -163,4 +125,4 @@ const Create = ({ token }) => {
   );
 };
 
-export default Create;
+export default EditForm;
