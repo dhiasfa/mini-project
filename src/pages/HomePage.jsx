@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Tabel from "../components/tabel/Tabel";
+import NavbarComp from "../components/NavbarComp";
+import "../css/main.css";
 const HomePage = ({ token }) => {
   let navigate = useNavigate();
 
@@ -11,15 +13,26 @@ const HomePage = ({ token }) => {
     window.location.reload(true);
   };
 
+  const handleCreate = () => {
+    navigate("/create");
+  };
+
   return (
-    <div>
-      <h3>Tabel, {token.user.user_metadata.full_name}</h3>
-      <div>
+    <div className="container-homepage">
+      <NavbarComp token={token} create="Create" logout="Logout" />
+      <h3 className="text-center">
+        Your Content, {token.user.user_metadata.full_name}
+      </h3>
+      {/* <div>
         <button className="btn btn-danger" onClick={handleLogout}>
           LOGOUT
         </button>
       </div>
-      <h2>Tabel artikelnya</h2>
+      <div className="artikel">
+        <button onClick={handleCreate} className="btn btn-primary">
+          Create
+        </button>
+      </div> */}
       <Tabel token={token} />
     </div>
   );

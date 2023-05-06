@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
-import Create from "./components/tabel/Create";
+import CreateForm from "./components/form/CreateForm";
 import Tabel from "./components/tabel/Tabel";
+import LandingPage from "./pages/LandingPage";
+import DisplayArtikel from "./pages/DisplayArtikel";
 
 function App() {
   const [token, setToken] = useState(false);
@@ -21,13 +23,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignUp />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/artikel/:id" element={<DisplayArtikel />} />
         {token ? (
           <>
             <Route path="/home-page" element={<HomePage token={token} />} />
             <Route path="/tabel" element={<Tabel token={token} />} />
-            <Route path="/create" element={<Create token={token} />} />
+            <Route path="/create" element={<CreateForm token={token} />} />
           </>
         ) : (
           <Route path="/login" element={<Login setToken={setToken} />} />

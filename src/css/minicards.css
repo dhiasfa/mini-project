@@ -1,0 +1,113 @@
+/* MINI-CARDS */
+.minicards-container {
+    padding-left: 1.5rem;
+  }
+  .minicards-container h5{
+    font-size: 2.2em;
+    font-weight: 600;
+  }
+  .mini-cards{
+      width: 34rem;
+      height: 8rem;
+      margin-bottom: 3rem;
+      /* margin-left: 1rem; */
+      /* background-color: #b39898; */
+  }
+  .read-link-container {
+    margin-top: auto;
+  }
+  
+  .read-link-container button {
+    font-size: 0.85em;
+    font-weight: 500;
+    padding: 0.2rem 0.3rem;
+    width: max-content;
+    text-align: center;
+    text-decoration: none;
+    background-color:  #e3e3e3;
+    color:#181e1e;
+    border: none;
+    border-radius: 30px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  .read-link-container button:hover {
+    background-color: #ffffff;
+    color: #444444;
+  }
+  
+  
+  .images-cards img{
+      width: 15rem;
+      height: 8rem;
+      padding-left:0.3rem;
+  }
+  .title-cards{
+    display: flex;
+    flex-direction: column;
+      width: 25rem;
+      height: 5rem;
+      word-wrap: break-word;
+     padding-left: 1rem;
+     padding-top: 0.3rem;
+     padding-bottom: 0.1rem;
+  }
+  
+  .title-cards p{
+      font-size: 0.85em;
+      font-weight: 700;
+      color: #a8aaab; 
+      margin-bottom: 0.3rem;
+  }
+  .title-cards h4{
+      font-weight: 600;
+      font-size: medium;
+      color: #181e1e;
+  }
+  
+  
+  @media (max-width: 720px) {
+    .minicards-container{
+      width: auto;
+      padding-left:0;
+    }
+    .minicards-container h5{
+      text-align: center;
+      font-size: 1.8em;
+    }
+    .mini-cards{
+      width: 100%;
+      height: 5rem;
+      margin-bottom: 0.5rem;
+      word-wrap: break-word;
+      }
+      
+      .images-cards img{
+      width:10rem;
+      height: 5rem;
+      padding-left:0;
+      }
+      
+      .title-cards{
+      width: 20rem;
+      height: auto;
+      padding-left: 0.5rem;
+      padding-right: 0.4rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      /* background-color: aqua; */
+      }
+      
+      .title-cards p{
+      font-size: 0.5em;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: #a8aaab;
+  
+      }
+      
+      .title-cards h4{
+      font-weight: 700;
+      font-size: 0.5em;
+      color: #181e1e;
+      }
+  }

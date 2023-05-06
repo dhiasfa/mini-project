@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
 import { Preview } from "../Editor/Editor";
-import EditForm from "./EditForm";
+import EditForm from "../form/EditForm";
+import "../../css/card.css";
 
 const Tabel = ({ token }) => {
   const navigate = useNavigate();
@@ -10,11 +11,11 @@ const Tabel = ({ token }) => {
   const [editMode, setEditMode] = useState(false);
   const [currentArticle, setCurrentArticle] = useState(null);
   const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(true); // tambahan state loading
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchArticles() {
-      setLoading(true); // set loading menjadi true saat data masih di-fetch
+      setLoading(true);
       const { data, error } = await supabase
         .from("artikel")
         .select("*")
@@ -25,7 +26,7 @@ const Tabel = ({ token }) => {
       } else {
         setArticles(data);
       }
-      setLoading(false); // set loading menjadi false saat data selesai di-fetch
+      setLoading(false);
     }
     fetchArticles();
   }, [token, currentArticle]);
@@ -56,10 +57,6 @@ const Tabel = ({ token }) => {
     }
   };
 
-  const handleCreate = () => {
-    navigate("/create");
-  };
-
   const handleUpdate = async (data) => {
     const { title, content, category, image_url } = data;
 
@@ -86,64 +83,54 @@ const Tabel = ({ token }) => {
 
   return (
     <>
-      <div className="artikel">
-        <button onClick={handleCreate} className="btn btn-primary">
-          Create
-        </button>
-      </div>
-      {loading ? ( // menampilkan tulisan loading saat loading masih true
-        <h3>Loading...</h3>
-      ) : editMode ? (
-        <EditForm
-          data={currentArticle}
-          handleUpdate={handleUpdate}
-          setEditMode={setEditMode}
-          content={content}
-          setContent={setContent}
-        />
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Judul</th>
-              <th scope="col">Konten</th>
-              <th scope="col">Kategori</th>
-              <th scope="col">Gambar</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {articles.map((article, index) => (
-              <tr key={article.id}>
-                <td scope="row">{index + 1}</td>
-                <td>{article.title}</td>
-                <td>{<Preview value={article.content} />}</td>
-                <td>{article.category}</td>
-                <td>
-                  {" "}
-                  <img
-                    src={article.image_url}
-                    alt={article.title}
-                    style={{ width: 100 }}
-                  />{" "}
-                </td>
-                <td>
+      <div className="card-container">
+        {loading ? (
+          <div className="container-loader">
+            <div className="custom-loader"></div>
+          </div>
+        ) : editMode ? (
+          <EditForm
+            data={currentArticle}
+            handleUpdate={handleUpdate}
+            setEditMode={setEditMode}
+            content={content}
+            setContent={setContent}
+          />
+        ) : (
+          <div className="card-table">
+            {articles.map((article) => (
+              <div className="card" key={article.id}>
+                <div className="card-header">
+                  <h5 className="card-title">{article.title}</h5>
+                </div>
+                <div className="card-image">
+                  <img src={article.image_url} alt={article.title} />
+                </div>
+                <div className="card-body">
+                  <div className="card-text">
+                    <Preview value={article.content} />
+                  </div>
+                  <div className="card-category">
+                    <p>{article.category}</p>
+                  </div>
+                </div>
+                <div className="card-footer">
                   <button
+                    className="btn-edit"
                     onClick={() => handleDelete(article.id, article.title)}>
                     Delete
                   </button>
                   <button
-                    className="btn btn-sm btn-warning me-2"
+                    className="btn-delete"
                     onClick={() => handleEdit(article)}>
                     Edit
                   </button>
-                </td>
-              </tr>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
-      )}
+          </div>
+        )}
+      </div>
     </>
   );
 };
