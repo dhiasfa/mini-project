@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useForm } from "react-hook-form";
-import { modules, Preview } from "../Editor/Editor";
-import { supabase } from "../../client";
+import { modules } from "../components/Editor/Editor";
+import { supabase } from "../client";
 import { useNavigate } from "react-router-dom";
+import "../css/createform.css";
 
-const Create = ({ token }) => {
+const CreateForm = ({ token }) => {
   const {
     register,
     handleSubmit,
@@ -68,9 +69,15 @@ const Create = ({ token }) => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="container-createform mt-5 mb-5"
+        onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
-          {loading && <h4>Loading...</h4>}
+          {loading && (
+            <div className="container-loader">
+              <div class="custom-loader"></div>
+            </div>
+          )}
           <label htmlFor="title" className="form-label">
             Title
           </label>
@@ -148,12 +155,12 @@ const Create = ({ token }) => {
           {errors?.category?.message}
         </p>
         <div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn-add">
             Add Blog
           </button>
           <button
             type="button"
-            className="btn btn-secondary ms-2"
+            className="btn-cancel"
             onClick={() => navigate("/home-page")}>
             Cancel
           </button>
@@ -163,4 +170,4 @@ const Create = ({ token }) => {
   );
 };
 
-export default Create;
+export default CreateForm;

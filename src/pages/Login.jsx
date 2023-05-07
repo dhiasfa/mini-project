@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../client";
+import "../css/login.css";
+import NavbarComp from "../components/NavbarComp";
+
 const Login = ({ setToken }) => {
   let navigate = useNavigate();
   const {
@@ -32,51 +35,54 @@ const Login = ({ setToken }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">Email</label> <br />
-        <input
-          type="email"
-          name="email"
-          id=""
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: regexEmail,
-              message: "Email tidak valid",
-            },
-          })}
-          style={{
-            border: errors.email && "1px solid red",
-          }}
-        />
-        {errors?.email?.message}
-        <br />
-        <label htmlFor="password">Password</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Panjang password minimal 6 karakter",
-            },
-          })}
-          style={{
-            border: errors.email && "1px solid red",
-          }}
-        />
-        {errors?.password?.message}
-        <br />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/"> Sign Up </Link>
-      </p>
+      <NavbarComp />
+      <div className="form-container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="email">Email</label> <br />
+          <input
+            type="email"
+            name="email"
+            id=""
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: regexEmail,
+                message: "Email tidak valid",
+              },
+            })}
+            style={{
+              border: errors.email && "1px solid red",
+            }}
+          />
+          {errors?.email?.message}
+          <br />
+          <label htmlFor="password">Password</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Panjang password minimal 6 karakter",
+              },
+            })}
+            style={{
+              border: errors.email && "1px solid red",
+            }}
+          />
+          {errors?.password?.message}
+          <br />
+          <button type="submit" className="btn btn-secondary">
+            Submit
+          </button>
+          <p>
+            Don't have an account? <Link to="/signUp"> Sign Up </Link>
+          </p>
+        </form>
+      </div>
     </>
   );
 };
