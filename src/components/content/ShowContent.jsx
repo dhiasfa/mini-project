@@ -5,7 +5,7 @@ import { Preview } from "../Editor/Editor";
 import EditForm from "../form/EditForm";
 import "../../css/card.css";
 
-const Tabel = ({ token }) => {
+const ShowContent = ({ token }) => {
   const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   const [editMode, setEditMode] = useState(false);
@@ -134,4 +134,4 @@ const Tabel = ({ token }) => {
     </>
   );
 };
-export default Tabel;
+export default ShowContent;

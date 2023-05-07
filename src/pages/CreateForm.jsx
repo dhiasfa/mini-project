@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useForm } from "react-hook-form";
-import { modules } from "../Editor/Editor";
-import { supabase } from "../../client";
+import { modules } from "../components/Editor/Editor";
+import { supabase } from "../client";
 import { useNavigate } from "react-router-dom";
-import "../../css/createform.css";
+import "../css/createform.css";
 
 const CreateForm = ({ token }) => {
   const {
