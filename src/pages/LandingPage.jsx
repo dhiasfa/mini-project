@@ -8,7 +8,7 @@ const LandingPage = () => {
     <div>
       <NavbarComp />
       <HeroComp />
-      <h2 className="title-blog text-center">Blog</h2>
+      <h2 className="title-blog text-center mt-3">All Post</h2>
       <Blog />
     </div>
   );
