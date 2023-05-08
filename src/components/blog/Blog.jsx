@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import MiniCards from "./blog/MiniCards";
-import CategoryComps from "./blog/CategoryComps";
+import MiniCards from "./MiniCards";
+import CategoryComps from "./CategoryComps";
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("");

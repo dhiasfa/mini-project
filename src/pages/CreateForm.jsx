@@ -23,7 +23,7 @@ const CreateForm = ({ token }) => {
   const url =
     "https://kpbcywbosxqtlyyzflpu.supabase.co/storage/v1/object/public/images/artikel/";
 
-  const handleContentChange = (content, delta, source, editor) => {
+  const handleContentChange = (editor) => {
     setValue(editor.getHTML());
   };
 
@@ -156,7 +156,7 @@ const CreateForm = ({ token }) => {
         </p>
         <div>
           <button type="submit" className="btn-add">
-            Add Blog
+            Add Post
           </button>
           <button
             type="button"

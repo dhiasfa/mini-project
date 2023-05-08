@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../client";
 import "../css/login.css";
-import NavbarComp from "../components/NavbarComp";
+import NavbarComp from "../components/navbar/NavbarComp";
 
 const Login = ({ setToken }) => {
   let navigate = useNavigate();
