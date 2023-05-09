@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import "../css/main.css";
+import "../../css/main.css";
 const HeroComp = () => {
   return (
     <div className="hero">

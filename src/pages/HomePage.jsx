@@ -1,6 +1,6 @@
 import React from "react";
 import ShowContent from "../components/content/ShowContent";
-import NavbarComp from "../components/NavbarComp";
+import NavbarComp from "../components/navbar/NavbarComp";
 import "../css/main.css";
 const HomePage = ({ token }) => {
   return (

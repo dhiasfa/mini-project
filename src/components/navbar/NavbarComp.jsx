@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import "../css/main.css";
+import "../../css/main.css";
 
 const NavbarComp = ({ token, create, logout }) => {
   const navigate = useNavigate();

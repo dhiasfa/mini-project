@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { supabase } from "../client";
 import "../css/login.css";
-import NavbarComp from "../components/NavbarComp";
+import NavbarComp from "../components/navbar/NavbarComp";
 const SignUp = () => {
   const {
     register,
