@@ -54,7 +54,7 @@ const EditForm = ({ data, handleUpdate, setEditMode, content, setContent }) => {
             id="title"
             {...register("title", {
               required: "Title is required",
-              minLength: { value: 25, message: "Minimal 25 characters" },
+              minLength: { value: 10, message: "Minimal 10 characters" },
             })}
             style={{
               border: errors.title && "1px solid red",
