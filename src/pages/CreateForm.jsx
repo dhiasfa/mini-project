@@ -17,14 +17,15 @@ const CreateForm = ({ token }) => {
   const [value, setValue] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const navigate = useNavigate();
 
   const url =
     "https://kpbcywbosxqtlyyzflpu.supabase.co/storage/v1/object/public/images/artikel/";
 
-  const handleContentChange = (editor) => {
-    setValue(editor.getHTML());
+  const handleContentChange = (content) => {
+    setValue(content);
   };
 
   const handleImageChange = (e) => {
@@ -65,19 +66,23 @@ const CreateForm = ({ token }) => {
     reset();
     setValue("");
     setImage(null);
-    alert("Data berhasil ditambahkan!");
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
   };
+
   return (
     <>
+      {showAlert && (
+        <div className="alert alert-success mt-4" role="alert">
+          Data berhasil ditambahkan!
+        </div>
+      )}
       <form
         className="container-createform mt-5 mb-5"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
-          {loading && (
-            <div className="container-loader">
-              <div class="custom-loader"></div>
-            </div>
-          )}
           <label htmlFor="title" className="form-label">
             Title
           </label>
@@ -155,14 +160,15 @@ const CreateForm = ({ token }) => {
           {errors?.category?.message}
         </p>
         <div>
-          <button type="submit" className="btn-add">
-            Add Post
+          <button type="submit" className="btn-add" disabled={loading}>
+            {loading ? "Loading..." : "Add Post"}
           </button>
           <button
             type="button"
             className="btn-cancel"
-            onClick={() => navigate("/home-page")}>
-            Cancel
+            onClick={() => navigate("/home-page")}
+            disabled={loading}>
+            {loading ? "Loading..." : "Cancel"}
           </button>
         </div>
       </form>

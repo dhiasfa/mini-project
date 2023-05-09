@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
 import { Preview } from "../Editor/Editor";
 import EditForm from "../form/EditForm";
 import "../../css/card.css";
 
 const ShowContent = ({ token }) => {
-  const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [currentArticle, setCurrentArticle] = useState(null);
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showAlertDelete, setShowAlertDelete] = useState(false);
+  const [showAlertEdit, setShowAlertEdit] = useState(false);
 
   useEffect(() => {
     async function fetchArticles() {
@@ -19,7 +19,8 @@ const ShowContent = ({ token }) => {
       const { data, error } = await supabase
         .from("artikel")
         .select("*")
-        .eq("user_id", token.user.id);
+        .eq("user_id", token.user.id)
+        .order("created_at", { ascending: false });
 
       if (error) {
         console.log(error);
@@ -37,23 +38,21 @@ const ShowContent = ({ token }) => {
   };
 
   const handleDelete = async (articleId, title) => {
-    const confirmDelete = window.confirm(
-      `Apakah yakin ingin menghapus blog dengan judul ${title}?`
-    );
+    const { error } = await supabase
+      .from("artikel")
+      .delete()
+      .eq("id", articleId);
 
-    if (confirmDelete) {
-      const { error } = await supabase
-        .from("artikel")
-        .delete()
-        .eq("id", articleId);
-
-      if (error) {
-        console.log(error);
-      } else {
-        setArticles((prevArticles) =>
-          prevArticles.filter((a) => a.id !== articleId)
-        );
-      }
+    if (error) {
+      console.log(error);
+    } else {
+      setArticles((prevArticles) =>
+        prevArticles.filter((a) => a.id !== articleId)
+      );
+      setShowAlertDelete(true);
+      setTimeout(() => {
+        setShowAlertDelete(false);
+      }, 3000);
     }
   };
 
@@ -76,7 +75,10 @@ const ShowContent = ({ token }) => {
       } else {
         setEditMode(false);
         setCurrentArticle(null);
-        alert("Data berhasil diupdate");
+        setShowAlertEdit(true);
+        setTimeout(() => {
+          setShowAlertEdit(false);
+        }, 3000);
       }
     }
   };
@@ -84,18 +86,30 @@ const ShowContent = ({ token }) => {
   return (
     <>
       <div className="card-container">
+        {showAlertDelete && (
+          <div className="alert alert-success mt-5" role="alert">
+            Data berhasil dihapus
+          </div>
+        )}
+        {showAlertEdit && (
+          <div className="alert alert-success mt-5" role="alert">
+            Data berhasil diupdate
+          </div>
+        )}
         {loading ? (
           <div className="container-loader">
             <div className="custom-loader"></div>
           </div>
         ) : editMode ? (
-          <EditForm
-            data={currentArticle}
-            handleUpdate={handleUpdate}
-            setEditMode={setEditMode}
-            content={content}
-            setContent={setContent}
-          />
+          <>
+            <EditForm
+              data={currentArticle}
+              handleUpdate={handleUpdate}
+              setEditMode={setEditMode}
+              content={content}
+              setContent={setContent}
+            />
+          </>
         ) : (
           <div className="card-table">
             {articles.map((article) => (
