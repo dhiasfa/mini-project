@@ -8,6 +8,7 @@ import "../css/main.css";
 const ShowArtikel = () => {
   const [article, setArticle] = useState(null);
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchArticle() {
@@ -22,31 +23,51 @@ const ShowArtikel = () => {
       } else {
         setArticle(data);
       }
+      setLoading(false);
     }
 
     fetchArticle();
   }, [id]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <>
       <NavbarComp />
-      <div className="container">
-        {article ? (
-          <div className="article-container mt-5">
-            <img
-              className="mt-5"
-              src={article.image_url}
-              alt=""
-              style={{ width: 700 }}
-            />
-            <h2 className="article-title">{article.title}</h2>
-            <p className="article-description">
-              {<Preview value={article.content} />}
-            </p>
-            <div className="article-category">{article.category}</div>
+      <div className="container mt-5">
+        {loading ? (
+          <div className="container-loader mt-5">
+            <div className="custom-loader"></div>
           </div>
         ) : (
-          <div>Loading...</div>
+          <>
+            {article ? (
+              <div className="article-container mt-5">
+                <img
+                  className="mt-5"
+                  src={article.image_url}
+                  alt=""
+                  style={{ width: 700 }}
+                />
+                <h2 className="article-title">{article.title}</h2>
+                <p>
+                  Author : {article.author} , {formatDate(article.created_at)}
+                </p>
+                <p className="article-description">
+                  {<Preview value={article.content} />}
+                </p>
+                <div className="article-category">{article.category}</div>
+              </div>
+            ) : (
+              <p>No article found.</p>
+            )}
+          </>
         )}
       </div>
     </>

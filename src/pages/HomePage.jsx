@@ -6,7 +6,7 @@ const HomePage = ({ token }) => {
   return (
     <div className="container-homepage">
       <NavbarComp token={token} create="Create" logout="Logout" />
-      <h3 className="text-center">
+      <h3 className="text-center mt-5">
         Your Content, {token.user.user_metadata.full_name}
       </h3>
       <ShowContent token={token} />

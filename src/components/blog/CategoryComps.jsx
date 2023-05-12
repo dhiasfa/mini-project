@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "../../css/main.css";
+import NewestComps from "./NewestComps";
 
 const CategoryComps = ({ onCategoryClick }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleOnClick = (category) => {
     setSelectedCategory(category);
-    onCategoryClick(category === "All Blog" ? "" : category);
+    onCategoryClick(category === "All Post" ? "" : category);
   };
 
   return (
@@ -50,10 +51,12 @@ const CategoryComps = ({ onCategoryClick }) => {
         </button>
         <button
           className={`btn-category ${selectedCategory === "" ? "active" : ""}`}
-          onClick={() => handleOnClick("All Blog")}>
-          All Blog
+          onClick={() => handleOnClick("All Post")}>
+          All Post
         </button>
       </div>
+      <p className="mt-3 mb-3">Newest</p>
+      <NewestComps />
     </div>
   );
 };

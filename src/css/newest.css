@@ -1,0 +1,43 @@
+.newest-container{
+    width: 30rem;
+    height: 8rem;
+    /* background-color: aqua; */
+    margin-bottom: 2rem;
+}
+.newest-container h4{
+    font-weight: 600;
+    font-size: medium;
+    color: #181e1e;
+}
+.images-newst img{
+    max-width: 10rem;
+    height:8rem;
+}
+.newest-comps p{
+    font-size: 0.85em;
+    font-weight: 700;
+    color: #a8aaab; 
+    margin-bottom: 0.3rem;
+}
+.date-newest p{
+    font-size: 0.8rem;
+    color: #444444;
+    font-weight: 400;
+}
+.newest-comps button {
+    font-size: 0.85em;
+    font-weight: 500;
+    padding: 0.2rem 0.3rem;
+    width: max-content;
+    text-align: center;
+    text-decoration: none;
+    background-color:  #e3e3e3;
+    color:#181e1e;
+    border: none;
+    border-radius: 30px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  .newest-comps button:hover {
+    background-color: #ffffff;
+    color: #444444;
+  }
