@@ -22,7 +22,6 @@ const Login = ({ setToken }) => {
         email: formData.email,
         password: formData.password,
       });
-      console.log(data);
       if (error) throw error;
       reset();
       setToken(data);

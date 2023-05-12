@@ -1,59 +1,72 @@
 .card-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+}
+
+.card-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  justify-items: center;
 }
 
 .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 31rem;
+  max-width: 50rem;
+  height: 20rem;
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 50rem;
-  margin: 2rem 0;
-  position: relative;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
   box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.2);
   transform: translateY(-0.2rem);
-  transition: all 0.3s ease;
 }
 
 .card-image {
+  height: 60%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .card-image img {
   width: 100%;
-  height: auto;
-  margin-top: 2rem;
-  border-radius: 0.5rem;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .card-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  align-items: center;
+  padding: 1rem;
 }
 
 .card-title {
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
 }
 
 .card-text {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #222;
   line-height: 1.5;
-  margin-bottom: 1rem;
-  height: 9rem;
+  height: 5rem;
   overflow: hidden;
   position: relative;
+  padding: 1rem;
 }
 
 .card-text::after {
@@ -66,22 +79,24 @@
   background-color: #fff;
   z-index: 1;
 }
+
 .card-category {
   font-size: 0.8rem;
   color: #999;
   text-transform: uppercase;
   margin-top: 1rem;
+  padding: 1rem;
 }
 
 .card-footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding: 1rem;
 }
 
 .card-footer button {
-  margin-right: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: none;
@@ -90,10 +105,10 @@
   text-transform: uppercase;
   background-color: #6c757d;
   color: #fff;
+  margin-right: 1rem;
 }
 
 .card-footer button:hover {
-  background-color: #181e1e;;
+  background-color: #181e1e;
   cursor: pointer;
 }
-

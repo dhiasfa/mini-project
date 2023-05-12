@@ -19,6 +19,11 @@ const MiniCards = ({ category, visible }) => {
 
     fetchCardsByCategory();
   }, [category]);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  };
 
   return (
     <div style={{ display: visible ? "block" : "none" }}>
@@ -30,8 +35,11 @@ const MiniCards = ({ category, visible }) => {
               <img className="img-fluid" src={card.image_url} alt="" />
             </div>
             <div className="title-cards ms-lg-2">
-              <p>{card.category}</p>
+              <p className="title-card-category">{card.category}</p>
               <h4>{card.title}</h4>
+              <div className="date">
+                <p>{formatDate(card.created_at)}</p>
+              </div>
               <div className="read-link-container">
                 <Link to={`/artikel/${card.id}`}>
                   <button>read</button>

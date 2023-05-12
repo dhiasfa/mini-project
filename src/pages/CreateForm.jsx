@@ -53,6 +53,7 @@ const CreateForm = ({ token }) => {
         category: data.category,
         image_url: `${url}${image.name}`,
         user_id: token.user.id,
+        author: token.user.user_metadata.full_name,
       },
     ]);
 
@@ -125,7 +126,7 @@ const CreateForm = ({ token }) => {
           />
         </div>
         <label htmlFor="category" className="mb-2">
-          Product Category:
+          Category:
         </label>
         <select
           className="form-select form-select-sm"
@@ -161,7 +162,7 @@ const CreateForm = ({ token }) => {
         </p>
         <div>
           <button type="submit" className="btn-add" disabled={loading}>
-            {loading ? "Loading..." : "Add Post"}
+            {loading ? "Loading..." : "Add"}
           </button>
           <button
             type="button"
