@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ReactQuill from "react-quill";
 import { useForm } from "react-hook-form";
-import { modules } from "../Editor/Editor";
+import { modules } from "../editor/Editor";
 import "../../css/editform.css";
 
 const EditForm = ({ data, handleUpdate, setEditMode, content, setContent }) => {
