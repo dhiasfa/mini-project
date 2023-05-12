@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../client";
 import { useParams } from "react-router-dom";
-import { Preview } from "../components/Editor/Editor";
+import { Preview } from "../components/editor/Editor";
 import NavbarComp from "../components/navbar/NavbarComp";
 import "../css/main.css";
 

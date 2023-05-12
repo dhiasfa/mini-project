@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useForm } from "react-hook-form";
-import { modules } from "../components/Editor/Editor";
+import { modules } from "../components/editor/Editor";
 import { supabase } from "../client";
 import { useNavigate } from "react-router-dom";
 import "../css/createform.css";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../client";
-import { Preview } from "../Editor/Editor";
+import { Preview } from "../editor/Editor";
 import EditForm from "../form/EditForm";
 import "../../css/card.css";
 
@@ -100,6 +100,16 @@ const ShowContent = ({ token }) => {
           <div className="container-loader">
             <div className="custom-loader"></div>
           </div>
+        ) : editMode ? (
+          <>
+            <EditForm
+              data={currentArticle}
+              handleUpdate={handleUpdate}
+              setEditMode={setEditMode}
+              content={content}
+              setContent={setContent}
+            />
+          </>
         ) : articles.length > 0 ? (
           <div className="card-table">
             {articles.map((article) => (
@@ -134,8 +144,8 @@ const ShowContent = ({ token }) => {
             ))}
           </div>
         ) : (
-          <div className="no-articles mt-3">
-            <h3>You haven't posted anything yet. Let's make one!</h3>
+          <div className="no-article mt-5">
+            <p>You haven't posted anything yet. Let's make one!</p>
           </div>
         )}
       </div>
